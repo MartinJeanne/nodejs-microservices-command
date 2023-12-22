@@ -21,3 +21,7 @@ router.get('/commands/:id', async (req, res) => {
 router.post('/commands', async (req, res) => {
     res.send(await mongoClient.postCommand(req.body));
 });
+
+router.get('/commands/ip', async (req, res) => {
+    res.send("ALED");
+});
