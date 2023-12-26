@@ -23,7 +23,18 @@ module.exports.getCommands = async (name) => {
 }
 
 module.exports.getCommand = async (id) => {
-    return await Command.findById(id);
+    const response = { status: 200, content: null };
+
+    await Command.findById(id).then(command => {
+        if (command == null) response.status = 204;
+        else response.content = command;
+    }).catch(error => {
+        console.error(error);
+        response.status = 400;
+        response.content = { error: error?.reason.toString() };
+    });
+
+    return response;
 }
 
 module.exports.postCommand = async (command) => {

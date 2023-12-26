@@ -14,7 +14,8 @@ router.get('/commands', async (req, res) => {
 
 //Get by ID Method
 router.get('/commands/:id', async (req, res) => {
-    res.send(await mongoClient.getCommand(req.params.id));
+    const response = await mongoClient.getCommand(req.params.id);
+    res.status(response.status).send(response.content);
 });
 
 //Post Method
